@@ -1,11 +1,44 @@
 <template>
-
+  <div>
+    <ul>
+      <Card v-for="(item,index) in list" :key="index"/>
+      <!--      <Card v-for="(item,index) in list" :key="index"-->
+      <!--            :height="item.height"-->
+      <!--            :weight="item.weight"-->
+      <!--            :base_experience="item.base_experience"-->
+      <!--            :id="item.id"-->
+      <!--            :name="item.name"-->
+      <!--            :front_default="item.front_default"-->
+      <!--            :back_default="item.back_default"/>-->
+    </ul>
+  </div>
 </template>
 
 <script>
 
 
+  import Card from "../components/Card";
+  import {mapActions, mapState} from 'vuex';
+
   export default {
-    components: {}
+    components: {Card},
+    data() {
+      return {}
+    },
+    async fetch({store, params}) {
+      console.log('fetch');
+      await store.dispatch('fetchList', {root: true});
+    },
+    computed:
+      mapState([
+        'list'
+      ])
+    ,
+    methods: {
+      ...mapActions([
+        'fetchList'
+      ])
+    }
+
   }
 </script>

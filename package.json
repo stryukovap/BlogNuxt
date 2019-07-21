@@ -13,7 +13,8 @@
   "dependencies": {
     "@nuxtjs/vuetify": "0.5.5",
     "@nuxtjs/axios": "^5.3.6",
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.0.0",
+    "vuex": "latest"
   },
   "devDependencies": {
     "stylus": "^0.54.5",

@@ -1,8 +1,10 @@
 <template>
   <li>
     <a href="#" @click.prevent="goTo(id)">
-      <!--      {{id}} {{name}}-->
-      <!--      {{height}} {{weight}} {{base_experience}} {{front_default}} {{back_default}}-->
+      {{id}} {{name}}
+      {{height}} {{weight}} {{base_experience}} {{front_default}} {{back_default}}
+      <img :src="front_default" alt="front_default">
+      <img :src="back_default" alt="back_default">
     </a>
   </li>
 </template>
@@ -10,13 +12,13 @@
   export default {
     name: 'card',
     props: {
-      // name: String,
-      // height: String,
-      // weight: String,
-      // base_experience: String,
-      // id: String,
-      // front_default: String,
-      // back_default: String
+      name: String,
+      height: Number,
+      weight: Number,
+      base_experience: Number,
+      id: Number,
+      front_default: String,
+      back_default: String
     },
     methods: {
       goTo(id) {

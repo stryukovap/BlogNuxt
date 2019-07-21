@@ -1,15 +1,15 @@
 <template>
   <div>
     <ul>
-      <Card v-for="(item,index) in list" :key="index"/>
-      <!--      <Card v-for="(item,index) in list" :key="index"-->
-      <!--            :height="item.height"-->
-      <!--            :weight="item.weight"-->
-      <!--            :base_experience="item.base_experience"-->
-      <!--            :id="item.id"-->
-      <!--            :name="item.name"-->
-      <!--            :front_default="item.front_default"-->
-      <!--            :back_default="item.back_default"/>-->
+      <!--      <Card v-for="(item,index) in list" :key="index"/>-->
+      <Card v-for="(item,index) in list" :key="index"
+            :height="item.height"
+            :weight="item.weight"
+            :base_experience="item.base_experience"
+            :id="item.id"
+            :name="item.name"
+            :front_default="item.sprites.front_default"
+            :back_default="item.sprites.back_default"/>
     </ul>
   </div>
 </template>
@@ -27,7 +27,7 @@
     },
     async fetch({store, params}) {
       console.log('fetch');
-      await store.dispatch('fetchList', {root: true});
+      await store.dispatch('getList', {root: true});
     },
     computed:
       mapState([
@@ -36,7 +36,7 @@
     ,
     methods: {
       ...mapActions([
-        'fetchList'
+        'getList'
       ])
     }
 

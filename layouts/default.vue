@@ -1,6 +1,6 @@
 <template>
-    <v-app dark>
-        <v-toolbar color="green" dark>
+    <v-app>
+        <v-toolbar color="green">
             <v-toolbar-title>My Pokemons</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-select

@@ -26,8 +26,8 @@
                 get() {
                     return this.$store.state.currentPage
                 },
-                set() {
-                    this.$store.commit('currentPage')
+                set(value) {
+                    this.$store.commit('currentPage', value)
                 }
             }
         }

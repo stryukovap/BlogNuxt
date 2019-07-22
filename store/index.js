@@ -39,11 +39,14 @@ export const actions = {
         if (context.state.quantity % context.state.limit > 0) {
             count++;
         }
-        ;
         context.commit('length', count);
     },
-    changeCurrentPage(context, payload) {
+    async changeCurrentPage(context, payload) {
         context.commit('currentPage', payload);
+        let count = parseInt(context.state.limit * context.state.currentPage);
+        console.log(count)
+        context.commit('offset', count);
+        await context.dispatch('getList');
     },
     async getList(context) {
         const data = await context.dispatch('GET',

@@ -81,7 +81,6 @@
 
     /* Style the back side */
     .flip-card-back {
-        background-color: transparent;
         transform: rotateY(180deg);
     }
 </style>

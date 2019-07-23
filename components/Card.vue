@@ -101,7 +101,6 @@
         methods: {
             goTo(id) {
                 this.$store.commit('currentPokemonId', id);
-                this.$store.dispatch('getPokemonById');
                 this.$router.push('/pokemon/' + id);
             }
         }

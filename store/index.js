@@ -7,8 +7,7 @@ export const state = () => ({
   quantity: 0,
   length: 0,
   currentPage: 0,
-  currentPokemon: {},
-  currentPokemonId: 0
+  currentPokemon: {}
 });
 export const mutations = {
   quantity(state, payload) {
@@ -32,8 +31,11 @@ export const mutations = {
   currentPokemon(state, payload) {
     return state.currentPokemon = payload;
   },
-  currentPokemonId(state, payload) {
-    return state.currentPokemonId = parseInt(payload);
+  currentPokemonSpecies(state, payload) {
+    return state.currentPokemon.species = payload;
+  },
+  currentPokemonLocation(state, payload) {
+    return state.currentPokemon.location_area_encounters = payload;
   }
 };
 export const actions = {
@@ -53,36 +55,58 @@ export const actions = {
     await context.dispatch('getList');
   },
   async getList(context) {
-    const data = await context.dispatch('GET',
-      {url: `${BASE_URL}pokemon?offset=${context.state.offset}&limit=${context.state.limit}`},
-      {root: true});
-    context.commit('quantity', data.count);
-    context.dispatch('mathLengthPagination');
-    if (data) {
-      const result = await Promise.all(
-        data.results.map(item => {
-          return context.dispatch('GET',
-            {url: item.url},
-            {root: true})
-        })
-      );
-      return context.commit('list', result);
+    try {
+      const data = await context.dispatch('GET',
+        {url: `${BASE_URL}pokemon?offset=${context.state.offset}&limit=${context.state.limit}`},
+        {root: true});
+      context.commit('quantity', data.count);
+      context.dispatch('mathLengthPagination');
+      if (data) {
+        const result = await Promise.all(
+          data.results.map(item => {
+            return context.dispatch('GET',
+              {url: item.url},
+              {root: true})
+          })
+        );
+        return context.commit('list', result);
+      }
+    } catch (e) {
+      console.log(e)
     }
   },
   async getPokemonById(context) {
-    const data = await context.dispatch('GET',
-      {url: `${BASE_URL}pokemon/${context.state.currentPokemonId}`},
-      {root: true});
-    return context.commit('currentPokemon', data);
+    try {
+      const data = await context.dispatch('GET',
+        {url: `${BASE_URL}pokemon/${context.state.currentPokemon.id}`},
+        {root: true});
+      return context.commit('currentPokemon', data);
+    } catch (e) {
+      console.log(e)
+    }
   },
   async changeLimit(context, payload) {
     context.commit('limit', payload);
     return await context.dispatch('getList')
   },
-  async getPokemonSpecies(context, payload) {
-    const data = await context.dispatch('GET',
-      {url: `${BASE_URL}pokemon/${context.state.currentPokemonId}`},
-      {root: true});
-    // return context.commit('currentPokemon', data);
+  async getPokemonSpecies(context) {
+    try {
+      const data = await context.dispatch('GET',
+        {url: `${context.state.currentPokemon.species.url}`},
+        {root: true});
+      return await context.commit('currentPokemonSpecies', data);
+    } catch (e) {
+      console.log(e)
+    }
+  },
+  async getPokemonLocation(context) {
+    try {
+      const data = await context.dispatch('GET',
+        {url: `${context.state.currentPokemon.location_area_encounters}`},
+        {root: true});
+      return await context.commit('currentPokemonLocation', data);
+    } catch (e) {
+      console.log(e)
+    }
   }
 };

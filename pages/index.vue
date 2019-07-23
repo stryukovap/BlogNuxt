@@ -30,7 +30,7 @@
             return {}
         },
         async fetch({store, params}) {
-            console.log('fetch');
+          // console.log('fetch');
             await store.dispatch('getList', {root: true});
         },
         computed:

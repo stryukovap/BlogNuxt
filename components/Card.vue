@@ -6,10 +6,12 @@
                     <div class="flip-card">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
-                                <v-img class="flip-card-img" :src="front_default" alt="front_default"></v-img>
+                              <v-img class="flip-card-img"
+                                     :src="`${front_default}` || ''" alt="front_default"></v-img>
                             </div>
                             <div class="flip-card-back">
-                                <v-img class="flip-card-img" :src="back_default" alt="front_default"></v-img>
+                              <v-img class="flip-card-img"
+                                     :src="back_default?`${back_default}`:''" alt="back_default"></v-img>
                             </div>
                         </div>
                     </div>

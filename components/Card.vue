@@ -49,7 +49,7 @@
     .flip-card {
         width: 150px;
         height: 150px;
-        background-color: transparent;
+      /*background-color: transparent;*/
         perspective: 1000px; /* Remove this if you don't want the 3D effect */
     }
 
@@ -59,7 +59,8 @@
         width: 100%;
         height: 100%;
         text-align: center;
-        transition: transform 0.8s;
+      /*transition: transform 0.8s;*/
+      transition: all 1s ease-in-out;
         transform-style: preserve-3d;
     }
 
@@ -78,12 +79,13 @@
 
     /* Style the front side (fallback if image is missing) */
     .flip-card-front {
-        background-color: transparent;
+      background-color: white;
     }
 
     /* Style the back side */
     .flip-card-back {
-        transform: rotateY(180deg);
+      background-color: white;
+      transform: rotateY(180deg);
     }
 </style>
 <script>

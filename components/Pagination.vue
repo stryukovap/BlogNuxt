@@ -27,7 +27,7 @@
                     return this.$store.state.currentPage
                 },
                 set(value) {
-                    this.$store.commit('currentPage', value)
+                    this.$store.dispatch('changeCurrentPage', value);
                 }
             }
         }

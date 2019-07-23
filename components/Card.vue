@@ -98,7 +98,9 @@
         },
         methods: {
             goTo(id) {
-                this.$router.push('/pokemon/' + id)
+                this.$store.commit('currentPokemonId', id);
+                this.$store.dispatch('getPokemonById');
+                this.$router.push('/pokemon/' + id);
             }
         }
     }

@@ -6,7 +6,9 @@ export const state = () => ({
     limitList: [10, 20, 30],
     quantity: 0,
     length: 0,
-    currentPage: 0
+    currentPage: 0,
+    currentPokemon: {},
+    currentPokemonId: 0
 });
 export const mutations = {
     quantity(state, payload) {
@@ -26,6 +28,12 @@ export const mutations = {
     },
     currentPage(state, payload) {
         return state.currentPage = payload;
+    },
+    currentPokemon(state, payload) {
+        return state.currentPokemon = payload;
+    },
+    currentPokemonId(state, payload) {
+        return state.currentPokemonId = parseInt(payload);
     }
 };
 export const actions = {
@@ -64,6 +72,12 @@ export const actions = {
             );
             return context.commit('list', result);
         }
+    },
+    async getPokemonById(context) {
+        const data = await context.dispatch('GET',
+            {url: `${BASE_URL}pokemon/${context.state.currentPokemonId}`},
+            {root: true});
+        return context.commit('currentPokemon', data);
     },
     async changeLimit(context, payload) {
         context.commit('limit', payload);

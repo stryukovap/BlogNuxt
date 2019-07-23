@@ -22,7 +22,10 @@
     import {mapActions, mapState} from 'vuex';
 
     export default {
-        components: {Pagination, Card},
+        components: {
+            Pagination,
+            Card
+        },
         data() {
             return {}
         },

@@ -31,6 +31,9 @@ export const mutations = {
   currentPokemon(state, payload) {
     return state.currentPokemon = payload;
   },
+  currentPokemonId(state, payload) {
+    return state.currentPokemon.id = payload;
+  },
   currentPokemonSpecies(state, payload) {
     return state.currentPokemon.species = payload;
   },

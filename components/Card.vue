@@ -18,7 +18,7 @@
                 </v-flex>
                 <v-flex xs8>
                     <div>
-                        <v-card-title primary-title>
+                      <v-card-title primary-title is="h1">
                             {{name}}
                         </v-card-title>
                         <div>

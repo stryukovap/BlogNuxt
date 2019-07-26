@@ -6,7 +6,7 @@ export const state = () => ({
   limitList: [10, 20, 30],
   quantity: 0,
   length: 0,
-  currentPage: 0,
+  currentPage: 1,
   currentPokemon: {}
 });
 export const mutations = {
@@ -55,6 +55,9 @@ export const actions = {
     context.commit('currentPage', payload);
     const count = parseInt(context.state.limit * context.state.currentPage);
     context.commit('offset', count);
+    if (context.state.currentPage === 1) {
+      context.commit('offset', 0);
+    }
     await context.dispatch('getList');
   },
   async getList(context) {

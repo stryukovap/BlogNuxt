@@ -1,6 +1,7 @@
 <template>
-  <v-container xs10>
-    <Card :height="currentPokemon.height"
+  <v-container xs10 v-if="currentPokemon">
+    <Card v-if="currentPokemon.sprites"
+          :height="currentPokemon.height"
           :weight="currentPokemon.weight"
           :base_experience="currentPokemon.base_experience"
           :id="currentPokemon.id"
@@ -28,7 +29,7 @@
         </li>
       </ul>
       <h2>Species</h2>
-      <ul>
+      <ul v-if="currentPokemon.species">
         <li>base_happiness = {{currentPokemon.species.base_happiness}}</li>
         <li>capture_rate = {{currentPokemon.species.capture_rate}}</li>
         <li>color = {{currentPokemon.species.color.name}}</li>
@@ -74,29 +75,19 @@
   import Card from "../../components/Card";
 
   export default {
-    // data(){
-    //   return{
-    //
-    //   }
-    // },
-    // created:{
-    //   function(){
-    //     const payload = this.$store.state.currentPokemon;
-    //     if(payload.hasOwnProperty()){
-    //       console.log('------');
-    //       return true
-    //     }
-    //   }
-    // },
+    data() {
+      return {
+        init: false
+      }
+    },
     validate({params}) {
-      // return !!params.id || (params.id < this.$store.state.quantity) || (params.id = 0)
       return !!params.id
     },
     components: {
       Card
     },
-    async fetch({store}) {
-      await store.dispatch('getPokemonById');
+    async fetch({store, params}) {
+      await store.dispatch('getPokemonById', params.id);
       await store.dispatch('getPokemonSpecies');
       await store.dispatch('getPokemonLocation');
     },

@@ -53,11 +53,11 @@ export const actions = {
   },
   async changeCurrentPage(context, payload) {
     context.commit('currentPage', payload);
-    const count = parseInt(context.state.limit * context.state.currentPage);
+    const count = context.state.limit * (context.state.currentPage - 1);
     context.commit('offset', count);
-    if (context.state.currentPage === 1) {
-      context.commit('offset', 0);
-    }
+    // if (context.state.currentPage === 1) {
+    //   context.commit('offset', 0);
+    // }
     await context.dispatch('getList');
   },
   async getList(context) {
@@ -81,10 +81,10 @@ export const actions = {
       console.log(e)
     }
   },
-  async getPokemonById(context) {
+  async getPokemonById(context, payload) {
     try {
       const data = await context.dispatch('GET',
-        {url: `${BASE_URL}pokemon/${context.state.currentPokemon.id}`},
+        {url: `${BASE_URL}pokemon/${context.state.currentPokemon.id || payload}`},
         {root: true});
       return context.commit('currentPokemon', data);
     } catch (e) {

@@ -8,7 +8,8 @@
                 :items="limitList"
       ></v-select>
       <v-spacer></v-spacer>
-      <v-toolbar-side-icon></v-toolbar-side-icon>
+      <v-icon v-show="listLayout" @click="toggleLayout">fas fa-list</v-icon>
+      <v-icon v-show="!listLayout" @click="toggleLayout">fas fa-th-large</v-icon>
     </v-toolbar>
     <nuxt/>
   </v-app>
@@ -19,7 +20,9 @@
 
   export default {
     data() {
-      return {}
+      return {
+        listLayout: true
+      }
     },
     computed: {
       ...mapState([
@@ -37,7 +40,10 @@
     methods: {
       ...mapActions([
         'getList'
-      ])
+      ]),
+      toggleLayout() {
+        this.listLayout = !this.listLayout
+      }
     }
   }
 </script>

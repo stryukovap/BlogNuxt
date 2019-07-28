@@ -10,25 +10,43 @@
           :back_default="currentPokemon.sprites.back_default">
     </Card>
     <div style="margin-top: 25px;">
-      <h2>Stats</h2>
+      <h3>Stats</h3>
       <ul>
         <li v-for="item in currentPokemon.stats">
           {{item.stat.name}} = {{item.base_stat}}
         </li>
       </ul>
-      <h2>Types</h2>
+      <h3>Types</h3>
       <ul>
         <li v-for="item in currentPokemon.types">
           {{item.type.name}}
         </li>
       </ul>
-      <h2>Forms</h2>
+      <h3>Forms</h3>
       <ul>
         <li v-for="item in currentPokemon.forms">
           {{item.name}}
         </li>
       </ul>
-      <h2>Species</h2>
+      <h3>Abilities</h3>
+      <ul>
+        <li v-for="item in currentPokemon.abilities">
+          {{item.ability.name}}
+        </li>
+      </ul>
+      <h3>held_items</h3>
+      <ul>
+        <li v-for="item in currentPokemon.held_items">
+          {{item.item.name}}
+        </li>
+      </ul>
+      <h3>location_area_encounters</h3>
+      <ul>
+        <li v-for="item in currentPokemon.location_area_encounters">
+          {{item.location_area.name}}
+        </li>
+      </ul>
+      <h3>Species</h3>
       <ul v-if="currentPokemon.species">
         <li>base_happiness = {{currentPokemon.species.base_happiness}}</li>
         <li>capture_rate = {{currentPokemon.species.capture_rate}}</li>
@@ -41,7 +59,7 @@
           </ul>
         </li>
         <li>
-          <h2>flavor_text_entries</h2>
+          <h3>flavor_text_entries</h3>
           <ul>
             <li v-for="item in currentPokemon.species.flavor_text_entries">
               {{item.flavor_text}}
@@ -49,30 +67,26 @@
           </ul>
         </li>
       </ul>
-      <h2>Abilities</h2>
-      <ul>
-        <li v-for="item in currentPokemon.abilities">
-          {{item.ability.name}}
-        </li>
-      </ul>
-      <h2>held_items</h2>
-      <ul>
-        <li v-for="item in currentPokemon.held_items">
-          {{item.item.name}}
-        </li>
-      </ul>
-      <h2>location_area_encounters</h2>
-      <ul>
-        <li v-for="item in currentPokemon.location_area_encounters">
-          {{item.location_area.name}}
-        </li>
-      </ul>
     </div>
+    <!--        <v-expansion-panels accordion>-->
+    <!--          <v-expansion-panel-->
+    <!--            v-for="(item,i) in 5"-->
+    <!--            :key="i"-->
+    <!--          >-->
+    <!--            <v-expansion-panel-header>Item</v-expansion-panel-header>-->
+    <!--            <v-expansion-panel-content>-->
+    <!--              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore-->
+    <!--              magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
+    <!--              consequat.-->
+    <!--            </v-expansion-panel-content>-->
+    <!--          </v-expansion-panel>-->
+    <!--        </v-expansion-panels>-->
   </v-container>
 </template>
 <script>
   import {mapState} from "vuex";
   import Card from "../../components/Card";
+  // import {VExpansionPanelContent, VExpansionPanel} from 'vuetify/lib'
 
   export default {
     data() {
@@ -84,7 +98,9 @@
       return !!params.id
     },
     components: {
-      Card
+      Card,
+      // VExpansionPanel,
+      // VExpansionPanelContent
     },
     async fetch({store, params}) {
       await store.dispatch('getPokemonById', params.id);

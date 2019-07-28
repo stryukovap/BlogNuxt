@@ -1,5 +1,9 @@
 const BASE_URL = 'https://pokeapi.co/api/v2/';
 export const state = () => ({
+  layout: {
+    listLayout: 'xs12',
+    cardList: 'row'
+  },
   list: [],
   offset: 0,
   limit: 10,
@@ -10,6 +14,9 @@ export const state = () => ({
   currentPokemon: {}
 });
 export const mutations = {
+  layout(state, payload) {
+    return state.layout = payload;
+  },
   quantity(state, payload) {
     return state.quantity = payload;
   },

@@ -1,7 +1,7 @@
 <template>
   <v-container grid-list-md>
     <v-layout wrap>
-      <v-flex class="toggleListToBlocks" v-for="(item,index) in list" :key="index" xs12>
+      <v-flex :class="`${layout.listLayout}`" v-for="(item,index) in list" :key="index">
         <Card :height="item.height"
               :weight="item.weight"
               :base_experience="item.base_experience"
@@ -14,18 +14,13 @@
     <pagination></pagination>
   </v-container>
 </template>
-<style>
-  .toggleListToBlocks {
-
-  }
-</style>
 
 <script>
 
 
   import Card from "../components/Card";
   import Pagination from "../components/Pagination";
-  import {mapActions, mapState} from 'vuex';
+  import {mapState} from 'vuex';
 
   export default {
     components: {
@@ -36,19 +31,11 @@
       return {}
     },
     async fetch({store, params}) {
-      // console.log('fetch');
       await store.dispatch('getList', {root: true});
     },
     computed:
       mapState([
-        'list'
+        'list', 'layout'
       ])
-    ,
-    methods: {
-      ...mapActions([
-        'getList'
-      ])
-    }
-
   }
 </script>

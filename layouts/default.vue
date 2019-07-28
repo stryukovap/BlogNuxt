@@ -14,11 +14,19 @@
       <v-icon @click="goBack">fas fa-arrow-left</v-icon>
     </v-toolbar>
     <nuxt/>
+    <v-footer color="green">
+      <v-layout
+        align-center
+        justify-center
+      >
+        <div>KeepSolid Summer Internship &copy; {{ new Date().getFullYear() }}</div>
+      </v-layout>
+    </v-footer>
   </v-app>
 </template>
 
 <script>
-  import {mapActions, mapState} from 'vuex';
+  import {mapState} from 'vuex';
 
   export default {
     data() {
@@ -28,7 +36,7 @@
     },
     computed: {
       ...mapState([
-        'limitList'
+        'limitList',
       ]),
       limit: {
         get() {
@@ -40,21 +48,19 @@
       }
     },
     methods: {
-      ...mapActions([
-        'getList'
-      ]),
       toggleLayout() {
+        if (this.listLayout) {
+          this.$store.commit('layout', {
+            listLayout: 'xs12',
+            cardList: 'row'
+          });
+        } else {
+          this.$store.commit('layout', {
+            listLayout: 'xs6',
+            cardList: 'column'
+          });
+        }
         this.listLayout = !this.listLayout;
-        const elList = document.querySelectorAll('.toggleListToBlocks');
-        elList.forEach(el => {
-          el.classList.toggle('xs12');
-          el.classList.toggle('xs6');
-        });
-        const cardList = document.querySelectorAll('.card__wrapper');
-        cardList.forEach(el => {
-          el.classList.toggle('row');
-          el.classList.toggle('column');
-        });
       },
       goBack() {
         this.$router.go(-1);
@@ -62,4 +68,9 @@
     }
   }
 </script>
+<style>
+  .toolbar__select {
+    width: 50px;
+  }
+</style>
 

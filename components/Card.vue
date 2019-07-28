@@ -1,15 +1,17 @@
 <template>
   <v-card class="card" :flat="true" @click.prevent="goTo(id)">
-    <v-layout class="card__wrapper" align-center justify-space-around row fill-height>
+    <v-layout :class="`${layout.cardList}`" align-center justify-space-around fill-height>
       <div class="flip-card">
         <div class="flip-card-inner">
           <div class="flip-card-front">
             <v-img class="flip-card-img"
-                   :src="`${front_default}` || ''" alt="front_default"></v-img>
+                   :src="`${front_default}` || ''"
+                   alt="front_default"></v-img>
           </div>
           <div class="flip-card-back">
             <v-img class="flip-card-img"
-                   :src="`${back_default}` || ''" alt="back_default"></v-img>
+                   :src="`${back_default}` || ''"
+                   alt="back_default"></v-img>
           </div>
         </div>
       </div>
@@ -26,6 +28,33 @@
     </v-layout>
   </v-card>
 </template>
+<script>
+  import {mapState} from "vuex";
+
+  export default {
+    name: 'card',
+    props: {
+      name: String,
+      height: Number,
+      weight: Number,
+      base_experience: Number,
+      id: Number,
+      front_default: String,
+      back_default: String
+    },
+    computed: {
+      ...mapState([
+        'layout',
+      ])
+    },
+    methods: {
+      goTo(id) {
+        this.$store.commit('currentPokemonId', id);
+        this.$router.push('/pokemon/' + id);
+      }
+    }
+  }
+</script>
 <style scoped>
   .capitalize {
     text-transform: capitalize;
@@ -46,6 +75,7 @@
   }
 
   .flip-card {
+    margin: 15px;
     width: 150px;
     height: 150px;
     /*background-color: transparent;*/
@@ -87,23 +117,4 @@
     transform: rotateY(180deg);
   }
 </style>
-<script>
-  export default {
-    name: 'card',
-    props: {
-      name: String,
-      height: Number,
-      weight: Number,
-      base_experience: Number,
-      id: Number,
-      front_default: String,
-      back_default: String
-    },
-    methods: {
-      goTo(id) {
-        this.$store.commit('currentPokemonId', id);
-        this.$router.push('/pokemon/' + id);
-      }
-    }
-  }
-</script>
+

@@ -42,9 +42,11 @@ export default {
   plugins: [],
   /*
   ** Nuxt.js modules
-  */
-  modules: [
+  */devModules: [
+    // Simple usage
     '@nuxtjs/vuetify',
+  ],
+  modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
   ],
@@ -53,21 +55,6 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {},
-  /*
-  ** vuetify module configuration
-  ** https://github.com/nuxt-community/vuetify-module
-  */
-  vuetify: {
-    theme: {
-      primary: colors.blue.darken2,
-      accent: colors.grey.darken3,
-      secondary: colors.amber.darken3,
-      info: colors.teal.lighten1,
-      warning: colors.amber.base,
-      error: colors.deepOrange.accent4,
-      success: colors.green.accent3
-    }
-  },
   /*
   ** Build configuration
   */

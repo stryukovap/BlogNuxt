@@ -58,35 +58,33 @@
             </li>
           </ul>
         </li>
-        <li>
-          <h3>flavor_text_entries</h3>
+        <!--        <li>-->
+        <!--          <h3>flavor_text_entries</h3>-->
+        <!--          <ul>-->
+        <!--            <li v-for="item in currentPokemon.species.flavor_text_entries">-->
+        <!--              {{item.flavor_text}}-->
+        <!--            </li>-->
+        <!--          </ul>-->
+        <!--        </li>-->
+      </ul>
+    </div>
+    <v-expansion-panels accordion>
+      <v-expansion-panel>
+        <v-expansion-panel-header>Flavor_text_entries</v-expansion-panel-header>
+        <v-expansion-panel-content>
           <ul>
             <li v-for="item in currentPokemon.species.flavor_text_entries">
               {{item.flavor_text}}
             </li>
           </ul>
-        </li>
-      </ul>
-    </div>
-    <!--        <v-expansion-panels accordion>-->
-    <!--          <v-expansion-panel-->
-    <!--            v-for="(item,i) in 5"-->
-    <!--            :key="i"-->
-    <!--          >-->
-    <!--            <v-expansion-panel-header>Item</v-expansion-panel-header>-->
-    <!--            <v-expansion-panel-content>-->
-    <!--              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore-->
-    <!--              magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
-    <!--              consequat.-->
-    <!--            </v-expansion-panel-content>-->
-    <!--          </v-expansion-panel>-->
-    <!--        </v-expansion-panels>-->
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-expansion-panels>
   </v-container>
 </template>
 <script>
   import {mapState} from "vuex";
   import Card from "../../components/Card";
-  // import {VExpansionPanelContent, VExpansionPanel} from 'vuetify/lib'
 
   export default {
     data() {
